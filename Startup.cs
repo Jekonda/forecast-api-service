@@ -29,7 +29,6 @@ namespace ReceivingService
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<IRepository<Forecast>, MongoRepository>();
             services.Configure<DataStoreDatabaseSettings>(Configuration.GetSection(nameof(DataStoreDatabaseSettings)));
-
             services.AddSingleton<IDataStoreDatabaseSettings>(sp =>
                     sp.GetRequiredService<IOptions<DataStoreDatabaseSettings>>().Value);
         }
