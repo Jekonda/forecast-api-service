@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ReceivingService.Service;
+using ReceivingService.Services;
 using ReceivingService.Models;
 
 namespace ReceivingService
@@ -27,8 +21,9 @@ namespace ReceivingService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddScoped<IRepository<Forecast>, MongoRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.Configure<DataStoreDatabaseSettings>(Configuration.GetSection(nameof(DataStoreDatabaseSettings)));
+            services.AddScoped(typeof(IDataCollection<>), typeof(EntityCollection<>));
             services.AddSingleton<IDataStoreDatabaseSettings>(sp =>
                     sp.GetRequiredService<IOptions<DataStoreDatabaseSettings>>().Value);
         }
