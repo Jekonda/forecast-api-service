@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ReceivingService.Service;
+using ReceivingService.Models;
 
 namespace ReceivingService
 {
@@ -22,13 +24,16 @@ namespace ReceivingService
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<IRepository<Forecast>, MongoRepository>();
+            services.Configure<DataStoreDatabaseSettings>(Configuration.GetSection(nameof(DataStoreDatabaseSettings)));
+
+            services.AddSingleton<IDataStoreDatabaseSettings>(sp =>
+                    sp.GetRequiredService<IOptions<DataStoreDatabaseSettings>>().Value);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -37,10 +42,8 @@ namespace ReceivingService
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseMvc();
         }
