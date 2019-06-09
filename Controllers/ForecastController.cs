@@ -16,13 +16,11 @@ namespace ReceivingService.Controllers
     {
         private readonly IRepository<Forecast> _repository;
         private readonly IRepository<Logs> _logsRepository;
-        private readonly MongoContext _context;
         
-        public ForecastController(IRepository<Forecast> repository, IRepository<Logs> logsRepository, MongoContext context)
+        public ForecastController(IRepository<Forecast> repository, IRepository<Logs> logsRepository)
         {
             _repository = repository;
             _logsRepository = logsRepository;
-            _context = context;
         }
 
         // POST api/values
@@ -71,12 +69,10 @@ namespace ReceivingService.Controllers
         }
         
         [HttpGet("data")]
-        public async Task<List<Forecast>> GetForecast()
+        public List<Forecast> GetForecast()
         {
-//            var forecast = _repository.GetAll();
-//            return forecast.ToList();
-            var list = await _context.Forecast.Find(x => true).ToListAsync();
-            return list;
+            var forecast = _repository.GetAll();
+            return forecast.ToList();
         }
 
         [HttpGet("ping")]
