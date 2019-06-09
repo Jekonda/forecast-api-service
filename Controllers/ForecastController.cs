@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReceivingService.Models;
 using ReceivingService.Services;
@@ -23,8 +24,39 @@ namespace ReceivingService.Controllers
         [HttpPost("send")]
         public async Task Post([FromBody] Forecast value)
         {
-            if(value != null)
-                await _repository.Save(value);
+            if (value != null)
+            {
+                value.Time = DateTime.Now;
+                try
+                {
+                    await _repository.Save(value);
+                    await _logsRepository.Save(new Logs
+                    {
+                        Level = "Info",
+                        Time = DateTime.Now,
+                        LogBody = value.ToString()
+                    });
+                }
+                catch (Exception e)
+                {
+                    await _logsRepository.Save(new Logs
+                    {
+                        Level = "Error",
+                        Time = DateTime.Now,
+                        LogBody = $"Exception was thrown: {e.Message}"
+                    });
+                }
+            }
+            else
+            {
+                await _logsRepository.Save(new Logs
+                {
+                    Level = "Error",
+                    Time = DateTime.Now,
+                    LogBody = "Request body has wrong format"
+                });
+            }
+            
         }
 
         

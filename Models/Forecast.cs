@@ -17,5 +17,10 @@ namespace ReceivingService.Models
         public int PlantHumidity { get; set; }
         [BsonElement("Time")]
         public DateTime Time { get; set; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Id)}: {Id}, {nameof(Humidity)}: {Humidity}, {nameof(Temp)}: {Temp}, {nameof(PlantHumidity)}: {PlantHumidity}, {nameof(Time)}: {Time}";
+        }
     }
 }
