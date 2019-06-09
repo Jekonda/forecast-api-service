@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using ReceivingService.DB;
 using ReceivingService.Models;
 using ReceivingService.Services;
 
@@ -14,11 +16,13 @@ namespace ReceivingService.Controllers
     {
         private readonly IRepository<Forecast> _repository;
         private readonly IRepository<Logs> _logsRepository;
+        private readonly MongoContext _context;
         
-        public ForecastController(IRepository<Forecast> repository, IRepository<Logs> logsRepository)
+        public ForecastController(IRepository<Forecast> repository, IRepository<Logs> logsRepository, MongoContext context)
         {
             _repository = repository;
             _logsRepository = logsRepository;
+            _context = context;
         }
 
         // POST api/values
@@ -67,10 +71,12 @@ namespace ReceivingService.Controllers
         }
         
         [HttpGet("data")]
-        public List<Forecast> GetForecast()
+        public async Task<List<Forecast>> GetForecast()
         {
-            var forecast = _repository.GetAll();
-            return forecast.ToList();
+//            var forecast = _repository.GetAll();
+//            return forecast.ToList();
+            var list = await _context.Forecast.Find(x => true).ToListAsync();
+            return list;
         }
 
         [HttpGet("ping")]

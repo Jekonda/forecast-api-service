@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using ReceivingService.DB;
 using ReceivingService.Services;
 using ReceivingService.Models;
 
@@ -21,6 +22,7 @@ namespace ReceivingService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<MongoContext>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.Configure<DataStoreDatabaseSettings>(Configuration.GetSection(nameof(DataStoreDatabaseSettings)));
             services.AddScoped(typeof(IDataCollection<>), typeof(EntityCollection<>));
