@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReceivingService.Models;
@@ -10,7 +12,6 @@ namespace ReceivingService.Controllers
     [ApiController]
     public class ForecastController : ControllerBase
     {
-
         private readonly IRepository<Forecast> _repository;
         private readonly IRepository<Logs> _logsRepository;
         
@@ -56,11 +57,26 @@ namespace ReceivingService.Controllers
                     LogBody = "Request body has wrong format"
                 });
             }
-            
         }
 
+        [HttpGet("logs")]
+        public List<Logs> GetLogs()
+        {
+            var logs = _logsRepository.GetAll();
+            return logs.ToList();
+        }
         
+        [HttpGet("data")]
+        public List<Forecast> GetForecast()
+        {
+            var forecast = _repository.GetAll();
+            return forecast.ToList();
+        }
 
-
+        [HttpGet("ping")]
+        public string Ping()
+        {
+            return "Pong";
+        }
     }
 }
