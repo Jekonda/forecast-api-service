@@ -4,40 +4,13 @@ using ReceivingService.Services;
 
 namespace ReceivingService.DB
 {
-    public class MongoContext
+    public class MongoContext: BaseContext
     {
-        private IMongoCollection<Forecast> _forecast;
-        private IMongoCollection<Logs> _logs;
-
-        private readonly IDataCollection<Forecast> _forecastCollection;
-        private readonly IDataCollection<Logs> _logsCollection;
-
-        public MongoContext(IDataCollection<Forecast> forecastCollection, IDataCollection<Logs> logsCollection)
+        public MongoContext(IDataCollection db) : base(db)
         {
-            _forecastCollection = forecastCollection;
-            _logsCollection = logsCollection;
         }
 
-        public IMongoCollection<Forecast> Forecast
-        {
-            get
-            {
-                if (_forecast != null)
-                    return _forecast;
-                _forecast = _forecastCollection.GetCollection();
-                return _forecast;
-            }
-        }
-
-        public IMongoCollection<Logs> Logs
-        {
-            get
-            {
-                if (_logs != null)
-                    return _logs;
-                _logs = _logsCollection.GetCollection();
-                return _logs;
-            }
-        }
+        public IMongoCollection<Forecast> Forecast => Db.GetCollection<Forecast>();
+        public IMongoCollection<Logs> Logs => Db.GetCollection<Logs>();
     }
 }

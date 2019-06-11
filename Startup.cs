@@ -7,6 +7,8 @@ using Microsoft.Extensions.Options;
 using ReceivingService.DB;
 using ReceivingService.Services;
 using ReceivingService.Models;
+using ReceivingService.Services.Client;
+using ReceivingService.Services.Repository;
 
 namespace ReceivingService
 {
@@ -23,11 +25,12 @@ namespace ReceivingService
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<MongoContext>();
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-            services.Configure<DataStoreDatabaseSettings>(Configuration.GetSection(nameof(DataStoreDatabaseSettings)));
-            services.AddScoped(typeof(IDataCollection<>), typeof(EntityCollection<>));
-            services.AddSingleton<IDataStoreDatabaseSettings>(sp =>
-                    sp.GetRequiredService<IOptions<DataStoreDatabaseSettings>>().Value);
+            services.AddScoped<ICrudRepository, CrudRepository>();
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
+            services.AddScoped<IDataCollection, EntityCollection>();
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                    sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            services.AddSingleton<IClient, MongoDbClient>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

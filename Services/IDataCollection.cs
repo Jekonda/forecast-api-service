@@ -2,8 +2,8 @@ using MongoDB.Driver;
 
 namespace ReceivingService.Services
 {
-    public interface IDataCollection<T>
+    public interface IDataCollection
     {
-        IMongoCollection<T> GetCollection();
+        IMongoCollection<T> GetCollection<T>();
     }
 }

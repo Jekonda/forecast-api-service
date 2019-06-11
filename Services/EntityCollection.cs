@@ -1,24 +1,23 @@
-using System;
-using System.ComponentModel;
-using System.Linq;
 using MongoDB.Driver;
 using ReceivingService.Models;
+using ReceivingService.Services.Client;
 
 namespace ReceivingService.Services
 {
-    public class EntityCollection<T> : IDataCollection<T>
+    public class EntityCollection : IDataCollection
     {
-        private readonly IDataStoreDatabaseSettings _settings;
-
-        public EntityCollection(IDataStoreDatabaseSettings settings)
+        private readonly IDatabaseSettings _settings;
+        private readonly MongoClient _client;
+        
+        public EntityCollection(IDatabaseSettings settings, IClient client)
         {
             _settings = settings;
+            _client = client.GetClient(settings.ConnectionString);
         }
 
-        public IMongoCollection<T> GetCollection()
+        public IMongoCollection<T> GetCollection<T>()
         {
-            var client = new MongoClient(_settings.ConnectionString);
-            var database = client.GetDatabase(_settings.DatabaseName);
+            var database = _client.GetDatabase(_settings.DatabaseName);
             return database.GetCollection<T>(typeof(T).Name);
         }
     }

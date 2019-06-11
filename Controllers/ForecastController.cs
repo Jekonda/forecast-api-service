@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using ReceivingService.DB;
 using ReceivingService.Models;
-using ReceivingService.Services;
+using ReceivingService.Services.Repository;
 
 namespace ReceivingService.Controllers
 {
@@ -14,13 +12,11 @@ namespace ReceivingService.Controllers
     [ApiController]
     public class ForecastController : ControllerBase
     {
-        private readonly IRepository<Forecast> _repository;
-        private readonly IRepository<Logs> _logsRepository;
-        
-        public ForecastController(IRepository<Forecast> repository, IRepository<Logs> logsRepository)
+        private readonly CrudRepository _crudRepository;
+
+        public ForecastController(CrudRepository crudRepository)
         {
-            _repository = repository;
-            _logsRepository = logsRepository;
+            _crudRepository = crudRepository;
         }
 
         // POST api/values
@@ -29,33 +25,30 @@ namespace ReceivingService.Controllers
         {
             if (value != null)
             {
-                value.Time = DateTime.Now;
+                value.CreatedOn = DateTime.Now;
                 try
                 {
-                    await _repository.Save(value);
-                    await _logsRepository.Save(new Logs
+                    await _crudRepository.Save(value);
+                    await _crudRepository.Save(new Logs
                     {
                         Level = "Info",
-                        Time = DateTime.Now,
                         LogBody = value.ToString()
                     });
                 }
                 catch (Exception e)
                 {
-                    await _logsRepository.Save(new Logs
+                    await _crudRepository.Save(new Logs
                     {
                         Level = "Error",
-                        Time = DateTime.Now,
                         LogBody = $"Exception was thrown: {e.Message}"
                     });
                 }
             }
             else
             {
-                await _logsRepository.Save(new Logs
+                await _crudRepository.Save(new Logs
                 {
                     Level = "Error",
-                    Time = DateTime.Now,
                     LogBody = "Request body has wrong format"
                 });
             }
@@ -64,21 +57,16 @@ namespace ReceivingService.Controllers
         [HttpGet("logs")]
         public List<Logs> GetLogs()
         {
-            var logs = _logsRepository.GetAll();
+            var logs = _crudRepository.GetAll<Logs>();
             return logs.ToList();
         }
-        
+
         [HttpGet("data")]
         public List<Forecast> GetForecast()
         {
-            var forecast = _repository.GetAll();
+            var forecast = _crudRepository.GetAll<Forecast>();
             return forecast.ToList();
         }
 
-        [HttpGet("ping")]
-        public string Ping()
-        {
-            return "Pong";
-        }
     }
 }

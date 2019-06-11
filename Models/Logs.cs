@@ -10,13 +10,11 @@ namespace ReceivingService.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         
-        [BsonElement("Level")]
         public string Level { get; set; }
         
-        [BsonElement("LogBody")]
         public string LogBody { get; set; }
         
-        [BsonElement("Time")]
-        public DateTime Time { get; set; }
+        [BsonDateTimeOptions]
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
     }
 }
