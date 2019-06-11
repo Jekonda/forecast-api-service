@@ -27,6 +27,7 @@ namespace ReceivingService.Controllers
             {
                 try
                 {
+                    value.CreatedOn = DateTime.Now;
                     await _crudRepository.Save(value);
                     await _crudRepository.Save(new Logs
                     {
@@ -39,6 +40,7 @@ namespace ReceivingService.Controllers
                     await _crudRepository.Save(new Logs
                     {
                         Level = "Error",
+                        CreatedOn = DateTime.Now,
                         LogBody = $"Exception was thrown: {e.Message}"
                     });
                 }
@@ -48,24 +50,18 @@ namespace ReceivingService.Controllers
                 await _crudRepository.Save(new Logs
                 {
                     Level = "Error",
+                    CreatedOn = DateTime.Now,
                     LogBody = "Request body has wrong format"
                 });
             }
         }
 
         [HttpGet("logs")]
-        public List<Logs> GetLogs()
-        {
-            var logs = _crudRepository.GetAll<Logs>();
-            return logs.ToList();
-        }
+        public List<Logs> GetLogs() =>_crudRepository.GetAll<Logs>().ToList();
 
         [HttpGet("data")]
-        public List<Forecast> GetForecast()
-        {
-            var forecast = _crudRepository.GetAll<Forecast>();
-            return forecast.ToList();
-        }
+        public List<Forecast> GetForecast() => _crudRepository.GetAll<Forecast>().ToList();
+        
 
     }
 }
