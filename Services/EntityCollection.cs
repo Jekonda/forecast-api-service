@@ -19,10 +19,7 @@ namespace ReceivingService.Services
         {
             var client = new MongoClient(_settings.ConnectionString);
             var database = client.GetDatabase(_settings.DatabaseName);
-            var propertyInfos = _settings.GetType().GetProperties().FirstOrDefault(c => c.Name.Contains(typeof(T).Name));
-            if (propertyInfos == null) throw new ArgumentException(nameof(T));
-            var collectionName = (string)propertyInfos.GetValue(_settings);
-            return database.GetCollection<T>(collectionName);
+            return database.GetCollection<T>(typeof(T).Name);
         }
     }
 }
