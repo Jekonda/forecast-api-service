@@ -25,7 +25,6 @@ namespace ReceivingService.Controllers
         {
             if (value != null)
             {
-                value.CreatedOn = DateTime.Now;
                 try
                 {
                     await _crudRepository.Save(value);

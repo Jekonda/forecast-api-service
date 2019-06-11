@@ -12,7 +12,6 @@ namespace ReceivingService.Models
         public decimal Humidity { get; set; }
         public decimal Temp { get; set; }
         public int PlantHumidity { get; set; }
-        
         public string PlantStatus { get; set; }
         
         [BsonDateTimeOptions]
