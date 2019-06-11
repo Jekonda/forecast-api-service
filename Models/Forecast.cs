@@ -14,8 +14,7 @@ namespace ReceivingService.Models
         public int PlantHumidity { get; set; }
         public string PlantStatus { get; set; }
         
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTimeOffset CreatedOn { get; set; } = DateTime.Now;
 
         public override string ToString()
         {
