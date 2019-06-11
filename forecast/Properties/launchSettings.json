@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ReceivingService": {
+    "forecast": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",
