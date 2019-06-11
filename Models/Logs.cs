@@ -14,7 +14,7 @@ namespace ReceivingService.Models
         
         public string LogBody { get; set; }
         
-        [BsonDateTimeOptions]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CreatedOn { get; set; } = DateTime.Now;
     }
 }

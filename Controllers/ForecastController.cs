@@ -12,9 +12,9 @@ namespace ReceivingService.Controllers
     [ApiController]
     public class ForecastController : ControllerBase
     {
-        private readonly CrudRepository _crudRepository;
+        private readonly ICrudRepository _crudRepository;
 
-        public ForecastController(CrudRepository crudRepository)
+        public ForecastController(ICrudRepository crudRepository)
         {
             _crudRepository = crudRepository;
         }
