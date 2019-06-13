@@ -61,7 +61,8 @@ namespace ReceivingService.Controllers
 
         [HttpGet("data")]
         public List<Forecast> GetForecast() => _crudRepository.GetAll<Forecast>().ToList();
-        
 
+        [HttpGet("ping")]
+        public string Ping() => "Pong";
     }
 }
