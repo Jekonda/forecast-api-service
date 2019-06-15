@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using ReceivingService.Models;
 using ReceivingService.Services.Repository;
 using Serilog;
+using ILogger = Serilog.ILogger;
 
 namespace ReceivingService.Controllers
 {
@@ -15,9 +16,9 @@ namespace ReceivingService.Controllers
     public class ForecastController : ControllerBase
     {
         private readonly ICrudRepository _crudRepository;
-        private readonly ILogger<ForecastController> _logger;
-        
-        public ForecastController(ICrudRepository crudRepository, ILogger<ForecastController> logger)
+        private readonly ILogger _logger;
+
+        public ForecastController(ICrudRepository crudRepository, ILogger logger)
         {
             _crudRepository = crudRepository;
             _logger = logger;
@@ -26,22 +27,15 @@ namespace ReceivingService.Controllers
         [HttpPost("send")]
         public async Task Post([FromBody] Forecast value)
         {
-            if (value != null)
+            try
             {
-                try
-                { 
-                    value.CreatedOn = DateTime.Now;
-                    await _crudRepository.Save(value);
-                    _logger.LogInformation("Item successfully saved", value);
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError("Could not save data", e);
-                }
+                value.CreatedOn = DateTime.Now;
+                await _crudRepository.Save(value);
+                _logger.Information($"Item successfully saved: {value}");
             }
-            else
+            catch (Exception e)
             {
-                _logger.LogWarning("Value is null");
+                _logger.Error($"Could not save data: {e}");
             }
         }
 

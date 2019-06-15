@@ -12,8 +12,9 @@ namespace ReceivingService.Models
         public decimal Humidity { get; set; }
         public decimal Temp { get; set; }
         public decimal Pressure { get; set; }
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
-
+        
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CreatedOn { get; set; }
         public override string ToString()
         {
             return $"{nameof(Id)}: {Id}, {nameof(Humidity)}: {Humidity}, {nameof(Temp)}: {Temp}, {nameof(Pressure)}: {Pressure}, {nameof(CreatedOn)}: {CreatedOn}";

@@ -24,13 +24,11 @@ namespace ReceivingService.SerivceConfiguration
             {
                 connectionString += $"/{db.DatabaseName}";
             }
-            
-
             var configuration = sp.GetRequiredService<IConfiguration>();
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .WriteTo.Console()
-                .WriteTo.MongoDB(connectionString, "Logs")
+                .WriteTo.MongoDB(connectionString, "Logs", period: TimeSpan.FromMilliseconds(1))
                 .CreateLogger();
             AppDomain.CurrentDomain.ProcessExit += (s, e) => Log.CloseAndFlush();
             return services.AddSingleton(Log.Logger);
