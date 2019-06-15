@@ -9,8 +9,7 @@ namespace ReceivingService.DB
         public MongoContext(IDataCollection db) : base(db)
         {
         }
-
+        
         public IMongoCollection<Forecast> Forecast => Db.GetCollection<Forecast>();
-        public IMongoCollection<Logs> Logs => Db.GetCollection<Logs>();
     }
 }

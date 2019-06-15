@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using ReceivingService.DB;
 using ReceivingService.Services;
 using ReceivingService.Models;
+using ReceivingService.SerivceConfiguration;
 using ReceivingService.Services.Client;
 using ReceivingService.Services.Repository;
 
@@ -31,6 +32,7 @@ namespace ReceivingService
             services.AddSingleton<IDatabaseSettings>(sp =>
                     sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             services.AddSingleton<IClient, MongoDbClient>();
+            services.AddSerilogServices();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

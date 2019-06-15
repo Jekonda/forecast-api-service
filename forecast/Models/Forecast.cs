@@ -11,12 +11,12 @@ namespace ReceivingService.Models
         public string Id { get; set; }
         public decimal Humidity { get; set; }
         public decimal Temp { get; set; }
-        
-        public DateTimeOffset CreatedOn { get; set; } = DateTime.Now;
+        public decimal Pressure { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         public override string ToString()
         {
-            return $"{nameof(Id)}: {Id}, {nameof(Humidity)}: {Humidity}, {nameof(Temp)}: {Temp}, {nameof(CreatedOn)}: {CreatedOn}";
+            return $"{nameof(Id)}: {Id}, {nameof(Humidity)}: {Humidity}, {nameof(Temp)}: {Temp}, {nameof(Pressure)}: {Pressure}, {nameof(CreatedOn)}: {CreatedOn}";
         }
     }
 }
