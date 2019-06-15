@@ -43,7 +43,7 @@ namespace ReceivingService.Controllers
         public IEnumerable<Forecast> GetForecast() => _crudRepository.GetAll<Forecast>();
 
         [HttpGet("actual")]
-        public Forecast GetActual() => _crudRepository.GetAll<Forecast>().Last();
+        public Forecast GetActual() => _crudRepository.GetAll<Forecast>().LastOrDefault();
 
         [HttpGet("today")]
         public IEnumerable<Forecast> GetTodayData()
