@@ -8,28 +8,28 @@ namespace forecast.Services.Repository
 {
     public class CrudRepository : ICrudRepository
     {
-        private readonly MongoContext _mongoContext;
+        private readonly AppDbContext _appDbContext;
 
-        public CrudRepository(MongoContext mongoContext)
+        public CrudRepository(AppDbContext appDbContext)
         {
-            _mongoContext = mongoContext;
+            _appDbContext = appDbContext;
         }
 
         public async Task<T> Save<T>(T item)
         {
-            await _mongoContext.Set<T>().InsertOneAsync(item);
+            await _appDbContext.Set<T>().InsertOneAsync(item);
             return item;
         }
 
         public IEnumerable<T> GetAll<T>()
         {
-            return _mongoContext.Set<T>().Find(x => true).ToEnumerable();
+            return _appDbContext.Set<T>().Find(x => true).ToEnumerable();
         }
 
         public async Task<bool> Update<T>(T entity, Func<T, bool> filter)
         {
             var actionResult =
-                await _mongoContext.Set<T>().ReplaceOneAsync(f => filter(f), entity, new UpdateOptions());
+                await _appDbContext.Set<T>().ReplaceOneAsync(f => filter(f), entity, new UpdateOptions());
             return actionResult.IsAcknowledged
                    && actionResult.ModifiedCount > 0;
         }

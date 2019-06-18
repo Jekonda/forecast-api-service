@@ -26,7 +26,7 @@ namespace ReceivingService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddScoped<MongoContext>();
+            services.AddScoped<AppDbContext>();
             services.AddScoped<ICrudRepository, CrudRepository>();
             services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
             services.AddScoped<IDataCollection, EntityCollection>();

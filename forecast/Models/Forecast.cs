@@ -1,9 +1,11 @@
 using System;
+using forecast.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace forecast.Models
 {
+    [CollectionName("Forecast")]
     public class Forecast
     {
         [BsonId]

@@ -4,12 +4,16 @@ using MongoDB.Driver;
 
 namespace forecast.DB
 {
-    public class MongoContext: BaseContext
+    public class AppDbContext: BaseContext
     {
-        public MongoContext(IDataCollection db) : base(db)
+        public AppDbContext(IDataCollection db) : base(db)
         {
         }
         
+        
         public IMongoCollection<Forecast> Forecast => Db.GetCollection<Forecast>();
+        
+        
+        
     }
 }

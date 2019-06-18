@@ -15,7 +15,7 @@ namespace forecast.Controllers
     {
         private readonly ICrudRepository _crudRepository;
         private readonly ILogger _logger;
-
+        
         public ForecastController(ICrudRepository crudRepository, ILogger logger)
         {
             _crudRepository = crudRepository;
