@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 
-namespace ReceivingService
+namespace forecast
 {
     public class Startup
     {
