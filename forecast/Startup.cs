@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using forecast.DB;
+using forecast.Models;
+using forecast.SerivceConfiguration;
+using forecast.Services;
+using forecast.Services.Client;
+using forecast.Services.Repository;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using ReceivingService.DB;
-using ReceivingService.Services;
-using ReceivingService.Models;
-using ReceivingService.SerivceConfiguration;
-using ReceivingService.Services.Client;
-using ReceivingService.Services.Repository;
+
 
 namespace ReceivingService
 {

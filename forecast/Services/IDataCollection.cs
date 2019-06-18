@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-namespace ReceivingService.Services
+namespace forecast.Services
 {
     public interface IDataCollection
     {

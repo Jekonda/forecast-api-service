@@ -1,7 +1,7 @@
 using System;
 using MongoDB.Driver;
 
-namespace ReceivingService.Services.Client
+namespace forecast.Services.Client
 {
     public class MongoDbClient: IClient
     {

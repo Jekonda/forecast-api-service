@@ -1,8 +1,8 @@
+using forecast.Models;
+using forecast.Services.Client;
 using MongoDB.Driver;
-using ReceivingService.Models;
-using ReceivingService.Services.Client;
 
-namespace ReceivingService.Services
+namespace forecast.Services
 {
     public class EntityCollection : IDataCollection
     {

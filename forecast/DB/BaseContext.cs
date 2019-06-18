@@ -1,7 +1,7 @@
+using forecast.Services;
 using MongoDB.Driver;
-using ReceivingService.Services;
 
-namespace ReceivingService.DB
+namespace forecast.DB
 {
     public class BaseContext
     {

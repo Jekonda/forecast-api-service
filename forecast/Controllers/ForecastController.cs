@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using forecast.Models;
+using forecast.Services.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ReceivingService.Models;
-using ReceivingService.Services.Repository;
 using Serilog;
-using ILogger = Serilog.ILogger;
 
-namespace ReceivingService.Controllers
+namespace forecast.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

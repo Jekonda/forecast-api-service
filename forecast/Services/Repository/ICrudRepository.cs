@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ReceivingService.Services.Repository
+namespace forecast.Services.Repository
 {
     public interface ICrudRepository
     {

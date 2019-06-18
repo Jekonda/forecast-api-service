@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using forecast.DB;
 using MongoDB.Driver;
-using ReceivingService.DB;
 
-namespace ReceivingService.Services.Repository
+namespace forecast.Services.Repository
 {
     public class CrudRepository : ICrudRepository
     {

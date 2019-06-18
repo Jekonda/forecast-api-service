@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-namespace ReceivingService.Services.Client
+namespace forecast.Services.Client
 {
     public interface IClient
     {

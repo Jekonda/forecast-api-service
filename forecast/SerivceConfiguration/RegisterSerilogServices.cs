@@ -1,11 +1,11 @@
 using System;
 using System.Text.RegularExpressions;
+using forecast.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ReceivingService.Models;
 using Serilog;
 
-namespace ReceivingService.SerivceConfiguration
+namespace forecast.SerivceConfiguration
 {
     public static class RegisterSerilogServices
     {

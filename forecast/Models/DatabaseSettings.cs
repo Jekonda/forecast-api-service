@@ -1,4 +1,4 @@
-namespace ReceivingService.Models
+namespace forecast.Models
 {
     public class DatabaseSettings : IDatabaseSettings
     {

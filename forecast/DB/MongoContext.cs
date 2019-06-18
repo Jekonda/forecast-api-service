@@ -1,8 +1,8 @@
+using forecast.Models;
+using forecast.Services;
 using MongoDB.Driver;
-using ReceivingService.Models;
-using ReceivingService.Services;
 
-namespace ReceivingService.DB
+namespace forecast.DB
 {
     public class MongoContext: BaseContext
     {
