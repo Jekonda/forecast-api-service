@@ -8,15 +8,21 @@ namespace forecast
 {
     public class Program
     {
-        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+        
+        public static IConfiguration Configuration { get; } = 
+            new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? EnvironmentName.Production}.json", optional: true)
             .Build();
         
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? EnvironmentName.Production;
+            CreateWebHostBuilder(args)
+                .UseEnvironment(environment)
+                .Build()
+                .Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
