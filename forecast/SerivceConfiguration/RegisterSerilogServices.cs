@@ -1,6 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
-using forecast.Models;
+using forecast.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;

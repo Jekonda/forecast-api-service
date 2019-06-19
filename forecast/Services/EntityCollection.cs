@@ -2,7 +2,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using forecast.Attributes;
-using forecast.Models;
+using forecast.Configuration;
 using forecast.Services.Client;
 using MongoDB.Bson;
 using MongoDB.Driver;

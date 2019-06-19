@@ -1,4 +1,4 @@
-namespace forecast.Models
+namespace forecast.Configuration
 {
     public class DatabaseSettings : IDatabaseSettings
     {
