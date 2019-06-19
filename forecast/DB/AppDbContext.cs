@@ -9,11 +9,6 @@ namespace forecast.DB
         public AppDbContext(IDataCollection db) : base(db)
         {
         }
-        
-        
         public IMongoCollection<Forecast> Forecast => Db.GetCollection<Forecast>();
-        
-        
-        
     }
 }

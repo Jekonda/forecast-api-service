@@ -23,12 +23,14 @@ namespace forecast.Services
 
         public IMongoCollection<T> GetCollection<T>()
         {
-            if (!CollectionExistsAsync(typeof(T).Name).Result)
+            var collectionName = typeof(T).GetCustomAttributes<CollectionName>().FirstOrDefault()?.Name ??
+                                 typeof(T).Name;
+            if (!CollectionExistsAsync(collectionName).Result)
             {
-                Database.CreateCollection(typeof(T).Name, new CreateCollectionOptions{Capped = true});
+                Database.CreateCollection(collectionName);
             }
-            var attr = typeof(T).GetCustomAttributes<CollectionName>().FirstOrDefault()?.Name;
-            return Database.GetCollection<T>(attr ?? typeof(T).Name);
+
+            return Database.GetCollection<T>(collectionName);
         }
 
         public async Task<bool> CollectionExistsAsync(string collectionName)

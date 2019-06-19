@@ -15,7 +15,7 @@ namespace forecast.Controllers
     {
         private readonly ICrudRepository _crudRepository;
         private readonly ILogger _logger;
-        
+
         public ForecastController(ICrudRepository crudRepository, ILogger logger)
         {
             _crudRepository = crudRepository;
@@ -46,10 +46,9 @@ namespace forecast.Controllers
         [HttpGet("today")]
         public IEnumerable<Forecast> GetTodayData()
         {
-            var startDateTime = DateTime.Today; //Today at 00:00:00
             var endDateTime = DateTime.Today.AddDays(1).AddTicks(-1); //Today at 23:59:59
-            return _crudRepository.GetAll<Forecast>().Where(d => d.CreatedOn >= startDateTime &&
-                                                                 d.CreatedOn <= endDateTime);
+            return _crudRepository.GetAll<Forecast>()
+                .Where(d => d.CreatedOn >= DateTime.Today && d.CreatedOn <= endDateTime);
         }
 
         [HttpGet("ping")]
