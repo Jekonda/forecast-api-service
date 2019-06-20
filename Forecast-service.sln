@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "forecast", "forecast\forecast.csproj", "{7BF26209-30C7-4EEA-846E-90576732DED6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecast.DataReceiver", "Forecast.DataReceiver\Forecast.DataReceiver.csproj", "{7BF26209-30C7-4EEA-846E-90576732DED6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forecast.SocketWriter", "Forecast.SocketWriter\Forecast.SocketWriter.csproj", "{A313CFD0-91C6-43C1-BDC6-0CE84F6B1777}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,5 +16,9 @@ Global
 		{7BF26209-30C7-4EEA-846E-90576732DED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BF26209-30C7-4EEA-846E-90576732DED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BF26209-30C7-4EEA-846E-90576732DED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A313CFD0-91C6-43C1-BDC6-0CE84F6B1777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A313CFD0-91C6-43C1-BDC6-0CE84F6B1777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A313CFD0-91C6-43C1-BDC6-0CE84F6B1777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A313CFD0-91C6-43C1-BDC6-0CE84F6B1777}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
