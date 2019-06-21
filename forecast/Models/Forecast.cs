@@ -15,7 +15,7 @@ namespace forecast.Models
         public decimal Temp { get; set; }
         public decimal Pressure { get; set; }
         
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime CreatedOn { get; set; }
         public override string ToString()
         {
