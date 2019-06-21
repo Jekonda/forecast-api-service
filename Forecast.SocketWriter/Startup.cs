@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace Forecast.SocketWriter
@@ -36,7 +35,7 @@ namespace Forecast.SocketWriter
             services.AddSignalR();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -47,9 +46,7 @@ namespace Forecast.SocketWriter
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
             app.UseSignalR(builder => { builder.MapHub<ForecastHub>("/socket"); });
-            app.UseRouting();
         }
     }
 }
