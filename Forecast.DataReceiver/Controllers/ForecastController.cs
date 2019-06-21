@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using forecast.Models;
-using forecast.Services.Repository;
+using Forecast.DataReceiver.Services.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using Forecast.DataReceiver;
+using Forecast.DataReceiver.Models;
 
-namespace forecast.Controllers
+
+namespace Forecast.DataReceiver.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,7 +25,7 @@ namespace forecast.Controllers
         }
 
         [HttpPost("send")]
-        public async Task Post([FromBody] Forecast value)
+        public async Task Post([FromBody] Models.Forecast value)
         {
             try
             {
@@ -38,16 +40,16 @@ namespace forecast.Controllers
         }
 
         [HttpGet("data")]
-        public IEnumerable<Forecast> GetForecast() => _crudRepository.GetAll<Forecast>();
+        public IEnumerable<Models.Forecast> GetForecast() => _crudRepository.GetAll<Models.Forecast>();
 
         [HttpGet("actual")]
-        public Forecast GetActual() => _crudRepository.GetAll<Forecast>().LastOrDefault();
+        public Models.Forecast GetActual() => _crudRepository.GetAll<Models.Forecast>().LastOrDefault();
 
         [HttpGet("today")]
-        public IEnumerable<Forecast> GetTodayData()
+        public IEnumerable<Models.Forecast> GetTodayData()
         {
             var endDateTime = DateTime.Today.AddDays(1).AddTicks(-1); //Today at 23:59:59
-            return _crudRepository.GetAll<Forecast>()
+            return _crudRepository.GetAll<Models.Forecast>()
                 .Where(d => d.CreatedOn >= DateTime.Today && d.CreatedOn <= endDateTime);
         }
 

@@ -1,4 +1,4 @@
-namespace forecast.Configuration
+namespace Forecast.DataReceiver.Configuration
 {
     public class DatabaseSettings : IDatabaseSettings
     {

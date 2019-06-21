@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace forecast.Services.Messages
+namespace Forecast.DataReceiver.Services.Messages
 {
     public interface IQueueSender
     {

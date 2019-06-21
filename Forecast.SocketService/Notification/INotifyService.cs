@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Forecast.SocketWriter.Notification
+namespace Forecast.SocketService.Notification
 {
     public interface INotifyService
     {

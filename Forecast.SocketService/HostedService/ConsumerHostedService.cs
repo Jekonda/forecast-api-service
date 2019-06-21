@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using forecast.Configuration;
-using Forecast.SocketWriter.Notification;
+using Forecast.DataReceiver.Configuration;
+using Forecast.SocketService.Notification;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Serilog;
 
-namespace Forecast.SocketWriter.HostedService
+namespace Forecast.SocketService.HostedService
 {
     public class ConsumerHostedService : BackgroundService
     {

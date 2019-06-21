@@ -1,14 +1,13 @@
-using forecast.Models;
-using forecast.Services;
+using Forecast.DataReceiver.Services;
 using MongoDB.Driver;
 
-namespace forecast.DB
+namespace Forecast.DataReceiver.DB
 {
     public class AppDbContext: BaseContext
     {
         public AppDbContext(IDataCollection db) : base(db)
         {
         }
-        public IMongoCollection<Forecast> Forecast => Db.GetCollection<Forecast>();
+        public IMongoCollection<Models.Forecast> Forecast => Db.GetCollection<Models.Forecast>();
     }
 }

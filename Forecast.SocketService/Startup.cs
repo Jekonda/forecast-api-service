@@ -1,19 +1,19 @@
-using forecast.Configuration;
-using forecast.SerivceConfiguration;
-using Forecast.SocketWriter.HostedService;
-using Forecast.SocketWriter.Hub;
-using Forecast.SocketWriter.Notification;
+﻿using Forecast.DataReceiver.Configuration;
+using Forecast.SocketService.HostedService;
+using Forecast.SocketService.Hub;
+using Forecast.SocketService.Notification;
+using Forecast.SocketService.ServiceConfiguration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Forecast.SocketWriter
+namespace Forecast.SocketService
 {
     public class Startup
     {
-
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,9 +21,10 @@ namespace Forecast.SocketWriter
 
         public IConfiguration Configuration { get; }
         
+        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<INotifyService, ForecastNotify>();
+            services.AddSingleton<INotifyService, ForecastNotify>();
             services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
             services.Configure<RabbitSettings>(Configuration.GetSection(nameof(RabbitSettings)));
             services.AddSingleton<IDatabaseSettings>(sp =>
@@ -44,7 +45,6 @@ namespace Forecast.SocketWriter
             else
             {
                 app.UseExceptionHandler("/Error");
-                app.UseHsts();
             }
             app.UseSignalR(builder => { builder.MapHub<ForecastHub>("/socket"); });
         }

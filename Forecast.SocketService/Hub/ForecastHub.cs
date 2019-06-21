@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Serilog;
 
-namespace Forecast.SocketWriter.Hub
+namespace Forecast.SocketService.Hub
 {
     public class ForecastHub: Microsoft.AspNetCore.SignalR.Hub
     {

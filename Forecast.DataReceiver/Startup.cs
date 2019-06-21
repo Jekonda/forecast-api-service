@@ -1,10 +1,10 @@
-﻿using forecast.Configuration;
-using forecast.DB;
-using forecast.SerivceConfiguration;
-using forecast.Services;
-using forecast.Services.Client;
-using forecast.Services.Messages;
-using forecast.Services.Repository;
+﻿using Forecast.DataReceiver.Configuration;
+using Forecast.DataReceiver.DB;
+using Forecast.DataReceiver.ServiceConfiguration;
+using Forecast.DataReceiver.Services;
+using Forecast.DataReceiver.Services.Client;
+using Forecast.DataReceiver.Services.Messages;
+using Forecast.DataReceiver.Services.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-
-namespace forecast
+namespace Forecast.DataReceiver
 {
     public class Startup
     {

@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Forecast.SocketWriter.Hub;
+using Forecast.SocketService.Hub;
 using Microsoft.AspNetCore.SignalR;
 using Serilog;
 
-namespace Forecast.SocketWriter.Notification
+namespace Forecast.SocketService.Notification
 {
     public class ForecastNotify: INotifyService
     {

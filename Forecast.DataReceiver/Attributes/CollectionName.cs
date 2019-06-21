@@ -1,6 +1,6 @@
 using System;
 
-namespace forecast.Attributes
+namespace Forecast.DataReceiver.Attributes
 {
     public class CollectionName: Attribute
     {

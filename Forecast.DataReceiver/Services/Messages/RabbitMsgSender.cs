@@ -1,10 +1,10 @@
 using System.Text;
 using System.Threading.Tasks;
-using forecast.Configuration;
+using Forecast.DataReceiver.Configuration;
 using RabbitMQ.Client;
 using Serilog;
 
-namespace forecast.Services.Messages
+namespace Forecast.DataReceiver.Services.Messages
 {
     public class RabbitSender : IQueueSender
     {

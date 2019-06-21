@@ -1,11 +1,11 @@
 using System;
 using System.Text.RegularExpressions;
-using forecast.Configuration;
+using Forecast.DataReceiver.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
-namespace forecast.SerivceConfiguration
+namespace Forecast.SocketService.ServiceConfiguration
 {
     public static class RegisterSerilogServices
     {
@@ -15,6 +15,8 @@ namespace forecast.SerivceConfiguration
             var db = sp.GetService<IDatabaseSettings>();
 
             var connectionString = db.ConnectionString;
+            if(string.IsNullOrEmpty(connectionString))
+                throw new ArgumentException(nameof(connectionString));
             if (db.ConnectionString.Contains("?"))
             {
                 var optionsString = new Regex(@"\?\S+").Match(db.ConnectionString).Value;

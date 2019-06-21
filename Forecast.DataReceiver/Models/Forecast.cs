@@ -1,9 +1,9 @@
 using System;
-using forecast.Attributes;
+using Forecast.DataReceiver.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace forecast.Models
+namespace Forecast.DataReceiver.Models
 {
     [CollectionName("Forecast")]
     public class Forecast

@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace Forecast.SocketWriter
+namespace Forecast.SocketService
 {
     public class Program
     {
