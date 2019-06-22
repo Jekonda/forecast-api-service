@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Forecast.DataReceiver;
 using Forecast.DataReceiver.Models;
+using Forecast.DataReceiver.Services.Messages;
 
 
 namespace Forecast.DataReceiver.Controllers
@@ -17,11 +18,13 @@ namespace Forecast.DataReceiver.Controllers
     {
         private readonly ICrudRepository _crudRepository;
         private readonly ILogger _logger;
-
-        public ForecastController(ICrudRepository crudRepository, ILogger logger)
+        private readonly IQueueSender _queueSender;
+        
+        public ForecastController(ICrudRepository crudRepository, ILogger logger, IQueueSender queueSender)
         {
             _crudRepository = crudRepository;
             _logger = logger;
+            _queueSender = queueSender;
         }
 
         [HttpPost("send")]
@@ -32,6 +35,7 @@ namespace Forecast.DataReceiver.Controllers
                 value.CreatedOn = DateTime.Now;
                 await _crudRepository.Save(value);
                 _logger.Information($"Item successfully saved: {value}");
+                await _queueSender.SendAsync(value.ToString());
             }
             catch (Exception e)
             {

@@ -17,7 +17,7 @@ namespace Forecast.DataReceiver.Services.Messages
             _rabbitSettings = rabbitSettings;
         }
 
-        public async Task SendAsync(object message, string queueName = null)
+        public async Task SendAsync(object message)
         {
             await Task.Run(() =>
             {
@@ -26,16 +26,11 @@ namespace Forecast.DataReceiver.Services.Messages
                 {
                     using (var channel = connection.CreateModel())
                     {
-                        queueName = string.IsNullOrEmpty(queueName) ? _rabbitSettings.DefaultQueue : queueName;
-                        channel.QueueDeclare(queue: queueName,
-                            durable: false,
-                            exclusive: false,
-                            autoDelete: false,
-                            arguments: null);
+                        channel.ExchangeDeclare(exchange: _rabbitSettings.ExchangeName, type: "fanout");
                         var body = Encoding.UTF8.GetBytes(message.ToString());
-                        _logger.Debug($"Message to sent: {message}");
-                        channel.BasicPublish(exchange: "",
-                            routingKey: queueName,
+                        _logger.Information($"Message to sent: {message}");
+                        channel.BasicPublish(exchange: _rabbitSettings.ExchangeName,
+                            routingKey: "",
                             basicProperties: null, body);
                     }
                 }
