@@ -13,9 +13,9 @@ namespace Forecast.SocketService.Hub
             _logger = logger;
         }
 
-        public Task SendMessage(string user, string message)
+        public Task SendMessage(string msg)
         {
-            return Clients.All.SendAsync("ReceiveMessage", user, message);
+            return Clients.All.SendAsync("ForecastData", msg);
         }
     }
 }

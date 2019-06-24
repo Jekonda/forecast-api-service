@@ -1,6 +1,6 @@
 using System.Text;
 using System.Threading.Tasks;
-using Forecast.DataReceiver.Configuration;
+using Forecast.Shared.Configuration;
 using RabbitMQ.Client;
 using Serilog;
 

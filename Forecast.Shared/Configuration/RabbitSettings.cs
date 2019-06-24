@@ -1,4 +1,4 @@
-namespace Forecast.DataReceiver.Configuration
+namespace Forecast.Shared.Configuration
 {
     public class RabbitSettings: IRabbitSettings
     {

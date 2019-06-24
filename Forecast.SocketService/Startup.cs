@@ -1,5 +1,5 @@
-﻿using Forecast.DataReceiver.Configuration;
-using Forecast.Shared.Configuration;
+﻿using Forecast.Shared.Configuration;
+using Forecast.Shared.Extensions;
 using Forecast.SocketService.HostedService;
 using Forecast.SocketService.Hub;
 using Forecast.SocketService.Notification;
@@ -25,15 +25,10 @@ namespace Forecast.SocketService
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<INotifyService, ForecastNotify>();
-            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
-            services.Configure<RabbitSettings>(Configuration.GetSection(nameof(RabbitSettings)));
-            services.AddSingleton<IDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-            services.AddSingleton<IRabbitSettings>(sp => 
-                sp.GetRequiredService<IOptions<RabbitSettings>>().Value);
-            services.AddSerilogServices();
+            services.AddSingleton<INotifyService, ForecastNotification>();
             services.AddHostedService<ConsumerHostedService>();
+            services.AddJsonOptions();
+            services.AddSerilogServices();
             services.AddSignalR();
         }
 

@@ -25,9 +25,9 @@ namespace Forecast.DataReceiver
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<ICrudRepository, CrudRepository>();
             services.AddTransient<IQueueSender, RabbitSender>();
-            services.AddJsonSettings();
             services.UseMongoContext<AppDbContext>();
             services.AddSerilogServices();
+            services.AddJsonOptions();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

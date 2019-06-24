@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Forecast.DataReceiver.Configuration;
+using Forecast.Shared.Configuration;
 using Forecast.SocketService.Notification;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
@@ -42,14 +42,14 @@ namespace Forecast.SocketService.HostedService
         {
             stoppingToken.ThrowIfCancellationRequested();
             _logger.Information($"Execute async");
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (ch, ea) =>
+            var consumer = new AsyncEventingBasicConsumer(_channel);
+            consumer.Received += async (ch, ea) =>
             {
                 // received message  
                 var content = System.Text.Encoding.UTF8.GetString(ea.Body);
                 _logger.Information($"Message received: {content}");
                 _channel.BasicAck(ea.DeliveryTag, false);
-                //await _notifyService.SendNotificationAsync(content);
+                await _notifyService.SendNotificationAsync(content);
             };
             _channel.BasicConsume(_rabbitSettings.QueueName, false, consumer);
             return Task.CompletedTask;

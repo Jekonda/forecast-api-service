@@ -1,6 +1,5 @@
 using System;
 using System.Text.RegularExpressions;
-using Forecast.DataReceiver.Configuration;
 using Forecast.Shared.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,14 +10,7 @@ namespace Forecast.DataReceiver.ServiceConfiguration
 {
     public static class ConfigurationExtensions
     {
-//        public static IServiceCollection UseMongoContext<T>(this IServiceCollection services) where T : BaseContext
-//        {
-//            services.AddScoped<T>();
-//            services.AddScoped<IDataCollection, EntityCollection>();
-//            services.AddSingleton<IClient, MongoDbClient>();
-//            return services;
-//        }
-        
+
         public static IServiceCollection AddSerilogServices(this IServiceCollection services)
         {
             var sp = services.BuildServiceProvider();
@@ -43,19 +35,6 @@ namespace Forecast.DataReceiver.ServiceConfiguration
                 .CreateLogger();
             AppDomain.CurrentDomain.ProcessExit += (s, e) => Log.CloseAndFlush();
             return services.AddSingleton(Log.Logger);
-        }
-        
-        public static IServiceCollection AddJsonSettings(this IServiceCollection services)
-        {
-            var provider = services.BuildServiceProvider();
-            var configuration = provider.GetRequiredService<IConfiguration>();
-            services.Configure<DatabaseSettings>(configuration.GetSection(nameof(DatabaseSettings)));
-            services.Configure<RabbitSettings>(configuration.GetSection(nameof(RabbitSettings)));
-            services.AddSingleton<IDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-            services.AddSingleton<IRabbitSettings>(sp => 
-                sp.GetRequiredService<IOptions<RabbitSettings>>().Value);
-            return services;
         }
     }
 }
