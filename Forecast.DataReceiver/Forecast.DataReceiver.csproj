@@ -14,4 +14,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00798" />
     <PackageReference Include="Serilog.Sinks.MongoDB" Version="4.1.0-dev-00069" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forecast.Shared\Forecast.Shared.csproj" />
+  </ItemGroup>
 </Project>

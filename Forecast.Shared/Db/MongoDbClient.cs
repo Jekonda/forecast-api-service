@@ -1,9 +1,9 @@
 using System;
 using MongoDB.Driver;
 
-namespace Forecast.DataReceiver.Services.Client
+namespace Forecast.Shared.Db
 {
-    public class MongoDbClient: IClient
+    public class MongoDbClient: Shared.Db.IClient
     {
         private MongoClient _mongoClient;
         

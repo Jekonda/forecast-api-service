@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Forecast.DataReceiver\Forecast.DataReceiver.csproj" />
+      <ProjectReference Include="..\Forecast.Shared\Forecast.Shared.csproj" />
     </ItemGroup>
 
 </Project>

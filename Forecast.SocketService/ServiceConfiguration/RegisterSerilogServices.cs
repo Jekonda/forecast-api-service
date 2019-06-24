@@ -1,6 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
-using Forecast.DataReceiver.Configuration;
+using Forecast.Shared.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -13,7 +13,6 @@ namespace Forecast.SocketService.ServiceConfiguration
         {
             var sp = services.BuildServiceProvider();
             var db = sp.GetService<IDatabaseSettings>();
-
             var connectionString = db.ConnectionString;
             if(string.IsNullOrEmpty(connectionString))
                 throw new ArgumentException(nameof(connectionString));

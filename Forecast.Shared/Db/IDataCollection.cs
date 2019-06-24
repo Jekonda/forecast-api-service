@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace Forecast.DataReceiver.Services
+namespace Forecast.Shared.Db
 {
     public interface IDataCollection
     {

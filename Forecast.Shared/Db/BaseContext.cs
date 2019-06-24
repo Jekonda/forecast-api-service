@@ -1,7 +1,6 @@
-using Forecast.DataReceiver.Services;
 using MongoDB.Driver;
 
-namespace Forecast.DataReceiver.DB
+namespace Forecast.Shared.Db
 {
     public class BaseContext
     {

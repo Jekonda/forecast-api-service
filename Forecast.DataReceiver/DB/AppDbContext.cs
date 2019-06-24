@@ -1,4 +1,4 @@
-using Forecast.DataReceiver.Services;
+using Forecast.Shared.Db;
 using MongoDB.Driver;
 
 namespace Forecast.DataReceiver.DB
@@ -7,7 +7,9 @@ namespace Forecast.DataReceiver.DB
     {
         public AppDbContext(IDataCollection db) : base(db)
         {
+        
         }
         public IMongoCollection<Models.Forecast> Forecast => Db.GetCollection<Models.Forecast>();
+
     }
 }

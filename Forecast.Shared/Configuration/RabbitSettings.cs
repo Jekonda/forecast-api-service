@@ -12,6 +12,5 @@ namespace Forecast.DataReceiver.Configuration
         string HostName { get; set; }
         string QueueName { get; set; }
         string ExchangeName { get; set; }
-
     }
 }

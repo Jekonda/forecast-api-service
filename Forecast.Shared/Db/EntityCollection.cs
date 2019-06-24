@@ -1,13 +1,12 @@
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Forecast.DataReceiver.Attributes;
-using Forecast.DataReceiver.Configuration;
-using Forecast.DataReceiver.Services.Client;
+using Forecast.Shared.Attributes;
+using Forecast.Shared.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Forecast.DataReceiver.Services
+namespace Forecast.Shared.Db
 {
     public class EntityCollection : IDataCollection
     {

@@ -1,5 +1,5 @@
 using System;
-using Forecast.DataReceiver.Attributes;
+using Forecast.Shared.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 

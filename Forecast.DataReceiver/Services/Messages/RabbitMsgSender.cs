@@ -10,7 +10,7 @@ namespace Forecast.DataReceiver.Services.Messages
     {
         private readonly ILogger _logger;
         private readonly IRabbitSettings _rabbitSettings;
-        
+
         public RabbitSender(ILogger logger, IRabbitSettings rabbitSettings)
         {
             _logger = logger;
@@ -23,16 +23,14 @@ namespace Forecast.DataReceiver.Services.Messages
             {
                 var factory = new ConnectionFactory {HostName = _rabbitSettings.HostName};
                 using (var connection = factory.CreateConnection())
+                using (var channel = connection.CreateModel())
                 {
-                    using (var channel = connection.CreateModel())
-                    {
-                        channel.ExchangeDeclare(exchange: _rabbitSettings.ExchangeName, type: "fanout");
-                        var body = Encoding.UTF8.GetBytes(message.ToString());
-                        _logger.Information($"Message to sent: {message}");
-                        channel.BasicPublish(exchange: _rabbitSettings.ExchangeName,
-                            routingKey: "",
-                            basicProperties: null, body);
-                    }
+                    channel.ExchangeDeclare(exchange: _rabbitSettings.ExchangeName, type: "fanout");
+                    var body = Encoding.UTF8.GetBytes(message.ToString());
+                    _logger.Information($"Message to sent: {message}");
+                    channel.BasicPublish(exchange: _rabbitSettings.ExchangeName,
+                        routingKey: "",
+                        basicProperties: null, body);
                 }
             });
         }
