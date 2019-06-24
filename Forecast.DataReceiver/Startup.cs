@@ -23,11 +23,11 @@ namespace Forecast.DataReceiver
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddJsonOptions();
             services.AddScoped<ICrudRepository, CrudRepository>();
             services.AddTransient<IQueueSender, RabbitSender>();
             services.UseMongoContext<AppDbContext>();
             services.AddSerilogServices();
-            services.AddJsonOptions();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

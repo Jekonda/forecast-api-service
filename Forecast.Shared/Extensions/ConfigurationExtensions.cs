@@ -21,7 +21,7 @@ namespace Forecast.Shared.Extensions
             var provider = services.BuildServiceProvider();
             var configuration = provider.GetRequiredService<IConfiguration>();
             services.Configure<DatabaseSettings>(configuration.GetSection(nameof(DatabaseSettings)));
-            services.Configure<RabbitSettings>(settings => configuration.GetSection(nameof(RabbitSettings)));
+            services.Configure<RabbitSettings>(configuration.GetSection(nameof(RabbitSettings)));
             services.AddSingleton<IDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             services.AddSingleton<IRabbitSettings>(sp => 

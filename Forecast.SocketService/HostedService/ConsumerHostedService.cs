@@ -42,7 +42,7 @@ namespace Forecast.SocketService.HostedService
         {
             stoppingToken.ThrowIfCancellationRequested();
             _logger.Information($"Execute async");
-            var consumer = new AsyncEventingBasicConsumer(_channel);
+            var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += async (ch, ea) =>
             {
                 // received message  

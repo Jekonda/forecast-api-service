@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 using Forecast.Shared.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Serilog;
 
 namespace Forecast.DataReceiver.ServiceConfiguration

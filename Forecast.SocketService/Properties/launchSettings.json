@@ -3,7 +3,7 @@
     "Forecast.SocketService": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:6000",
+      "applicationUrl": "http://localhost:8001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
