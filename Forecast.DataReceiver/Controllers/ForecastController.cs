@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Forecast.DataReceiver.Services.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using Forecast.DataReceiver;
-using Forecast.DataReceiver.Models;
 using Forecast.DataReceiver.Services.Messages;
 
 

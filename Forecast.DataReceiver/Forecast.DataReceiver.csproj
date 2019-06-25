@@ -11,7 +11,7 @@
     <PackageReference Include="RabbitMQ.Client" Version="5.1.1-rc1" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.0.0-dev-00043" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.1-dev-00209" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00798" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00800" />
     <PackageReference Include="Serilog.Sinks.MongoDB" Version="4.1.0-dev-00069" />
   </ItemGroup>
   <ItemGroup>

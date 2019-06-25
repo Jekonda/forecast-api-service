@@ -1,5 +1,4 @@
 ﻿using Forecast.DataReceiver.DB;
-using Forecast.DataReceiver.ServiceConfiguration;
 using Forecast.DataReceiver.Services.Messages;
 using Forecast.DataReceiver.Services.Repository;
 using Forecast.Shared.Extensions;

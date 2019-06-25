@@ -1,15 +1,12 @@
-﻿using Forecast.Shared.Configuration;
-using Forecast.Shared.Extensions;
+﻿using Forecast.Shared.Extensions;
 using Forecast.SocketService.HostedService;
 using Forecast.SocketService.Hub;
 using Forecast.SocketService.Notification;
-using Forecast.SocketService.ServiceConfiguration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace Forecast.SocketService
 {
