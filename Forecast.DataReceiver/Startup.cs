@@ -21,6 +21,10 @@ namespace Forecast.DataReceiver
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder => builder.AllowAnyOrigin());
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddJsonOptions();
             services.AddScoped<ICrudRepository, CrudRepository>();
@@ -40,6 +44,7 @@ namespace Forecast.DataReceiver
                 app.UseHsts();
             }
 
+            app.UseCors();
             app.UseMvc();
         }
     }
