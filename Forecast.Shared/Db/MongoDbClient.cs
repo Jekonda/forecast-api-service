@@ -1,0 +1,21 @@
+using System;
+using MongoDB.Driver;
+
+namespace Forecast.Shared.Db
+{
+    public class MongoDbClient: Shared.Db.IClient
+    {
+        private MongoClient _mongoClient;
+        
+        public MongoClient GetClient(string connectionString)
+        {
+            if (string.IsNullOrEmpty(connectionString))
+                throw new ArgumentNullException(nameof(connectionString));
+            if(_mongoClient == null)
+                _mongoClient = new MongoClient(connectionString);
+            if(_mongoClient == null)
+                throw new MongoClientException(nameof(connectionString));
+            return _mongoClient;
+        }
+    }
+}
