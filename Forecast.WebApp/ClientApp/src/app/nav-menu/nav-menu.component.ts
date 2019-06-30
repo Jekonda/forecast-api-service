@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import {MediaMatcher} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+  styleUrls: ['./nav-menu.component.scss']
 })
-export class NavMenuComponent {
-  isExpanded = false;
+export class NavMenuComponent implements OnDestroy{
+  mobileQuery: MediaQueryList;
 
-  collapse() {
-    this.isExpanded = false;
+  private _mobileQueryListener: () => void;
+
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }
