@@ -21,6 +21,7 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
       <PackageReference Include="MongoDB.Driver" Version="2.8.1" />
+      <PackageReference Include="RabbitMQ.Client" Version="5.1.1-rc1" />
       <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.1-dev-00209" />
       <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00800" />
       <PackageReference Include="Serilog.Sinks.MongoDB" Version="4.1.0-dev-00069" />

@@ -16,14 +16,13 @@ namespace Forecast.Shared.Extensions
             LogEventLevel restrictedToMinimumLevel = LogEventLevel.Verbose,
             int batchPostingLimit = 50,
             TimeSpan period = default,
-            IFormatProvider formatProvider = null,
             ITextFormatter textFormatter = null)
         {
             if (loggerConfiguration == null)
                 throw new ArgumentNullException(nameof (loggerConfiguration));
             if (string.IsNullOrWhiteSpace(host))
                 throw new ArgumentNullException(nameof (host));
-            return loggerConfiguration.Sink((ILogEventSink) new QueueSink(host, batchPostingLimit, period, formatProvider, queueName, textFormatter), restrictedToMinimumLevel);
+            return loggerConfiguration.Sink((ILogEventSink) new QueueSink(host, batchPostingLimit, period, queueName, textFormatter), restrictedToMinimumLevel);
         }
     }
 }
