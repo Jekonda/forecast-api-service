@@ -19,23 +19,22 @@ namespace Forecast.Shared.Extensions
             return services;
         }
         
-        public static IServiceCollection AddJsonOptions(this IServiceCollection services)
+        public static IServiceCollection MapJsonOptions<TI, TC>(this IServiceCollection services) where TC : class, TI, new() where TI : class
         {
             var provider = services.BuildServiceProvider();
             var configuration = provider.GetRequiredService<IConfiguration>();
-            services.Configure<DatabaseSettings>(configuration.GetSection(nameof(DatabaseSettings)));
-            services.Configure<RabbitSettings>(configuration.GetSection(nameof(RabbitSettings)));
-            services.AddSingleton<IDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-            services.AddSingleton<IRabbitSettings>(sp => 
-                sp.GetRequiredService<IOptions<RabbitSettings>>().Value);
+            services.Configure<TC>(configuration.GetSection(typeof(TC).Name));
+            services.AddSingleton<TI>(sp => sp.GetRequiredService<IOptions<TC>>().Value);
             return services;
         }
         
-        public static IServiceCollection AddSerilogServices(this IServiceCollection services)
+        [Obsolete("AddMongoSerilogServices is deprecated, use AddSerilogConsoleService")]
+        public static IServiceCollection AddMongoSerilogServices(this IServiceCollection services)
         {
             var sp = services.BuildServiceProvider();
             var db = sp.GetService<IDatabaseSettings>();
+            if(db == null)
+                throw new ArgumentNullException(nameof(IDatabaseSettings));
             var connectionString = db.ConnectionString;
             if(string.IsNullOrEmpty(connectionString))
                 throw new ArgumentException(nameof(connectionString));
@@ -53,6 +52,18 @@ namespace Forecast.Shared.Extensions
                 .ReadFrom.Configuration(configuration)
                 .WriteTo.Console()
                 .WriteTo.MongoDB(connectionString, $"{AppDomain.CurrentDomain.FriendlyName}Logs", period: TimeSpan.FromMilliseconds(1))
+                .CreateLogger();
+            AppDomain.CurrentDomain.ProcessExit += (s, e) => Log.CloseAndFlush();
+            return services.AddSingleton(Log.Logger);
+        }
+        
+        public static IServiceCollection AddSerilogConsoleService(this IServiceCollection services)
+        {
+            var sp = services.BuildServiceProvider();
+            var configuration = sp.GetRequiredService<IConfiguration>();
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .WriteTo.Console()
                 .CreateLogger();
             AppDomain.CurrentDomain.ProcessExit += (s, e) => Log.CloseAndFlush();
             return services.AddSingleton(Log.Logger);
