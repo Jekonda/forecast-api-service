@@ -17,11 +17,13 @@
         <PackageReference Include="Contrib.Microsoft.AspNetCore.Identity.MongoDB" Version="2.0.5" />
         <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
         <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,6 +37,10 @@
     <ItemGroup>
       <TypeScriptCompile Include="ClientApp\src\app\material\material.module.ts" />
       <TypeScriptCompile Include="ClientApp\src\app\Models\Forecast.ts" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Forecast.Shared\Forecast.Shared.csproj" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
