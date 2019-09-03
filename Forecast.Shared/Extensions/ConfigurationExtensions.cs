@@ -14,7 +14,7 @@ namespace Forecast.Shared.Extensions
         public static IServiceCollection UseMongoContext<T>(this IServiceCollection services) where T : BaseContext
         {
             services.AddScoped<T>();
-            services.AddScoped<IDataCollection, EntityCollection>();
+            services.AddScoped<CollectionFactory>();
             services.AddSingleton<IClient, MongoDbClient>();
             return services;
         }

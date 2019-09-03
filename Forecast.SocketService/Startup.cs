@@ -33,7 +33,7 @@ namespace Forecast.SocketService
             });
             services.MapJsonOptions<IRabbitSettings, RabbitSettings>();
             services.AddSingleton<INotifyService, ForecastNotification>();
-            services.AddHostedService<ConsumerHostedService>();
+            services.AddHostedService<ConsumerService>();
             services.AddSerilogConsoleService();
             services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

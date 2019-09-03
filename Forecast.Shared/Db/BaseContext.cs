@@ -4,13 +4,13 @@ namespace Forecast.Shared.Db
 {
     public class BaseContext
     {
-        protected readonly IDataCollection Db;
+        protected readonly CollectionFactory CollectionFactory;
 
-        protected BaseContext(IDataCollection db)
+        protected BaseContext(CollectionFactory db)
         {
-            Db = db;
+            CollectionFactory = db;
         }
 
-        public IMongoCollection<T> Set<T>() => Db.GetCollection<T>();
+        public IMongoCollection<T> Set<T>() => CollectionFactory.GetCollection<T>();
     }
 }

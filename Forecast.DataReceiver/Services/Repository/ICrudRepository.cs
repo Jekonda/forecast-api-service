@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MongoDB.Driver.Linq;
 
 namespace Forecast.DataReceiver.Services.Repository
 {
     public interface ICrudRepository
     {
-         Task<T> Save<T>(T entity);
-         IEnumerable<T> GetAll<T>();
-         Task<bool> Update<T>(T entity, Func<T, bool> filter);
+         Task<T> SaveAsync<T>(T entity);
+         Task<List<T>> ToListAsync<T>();
+         IMongoQueryable<T> AsQueryable<T>();
+         Task<bool> UpdateAsync<T>(T entity, Func<T, bool> filter);
 
     }
 }

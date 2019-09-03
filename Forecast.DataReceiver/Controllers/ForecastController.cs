@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Forecast.DataReceiver.Models;
 using Forecast.DataReceiver.Services.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Forecast.DataReceiver.Services.Messages;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Forecast.DataReceiver.Controllers
 {
@@ -17,7 +18,7 @@ namespace Forecast.DataReceiver.Controllers
         private readonly ICrudRepository _crudRepository;
         private readonly ILogger _logger;
         private readonly IQueueSender _queueSender;
-        
+
         public ForecastController(ICrudRepository crudRepository, ILogger logger, IQueueSender queueSender)
         {
             _crudRepository = crudRepository;
@@ -26,12 +27,12 @@ namespace Forecast.DataReceiver.Controllers
         }
 
         [HttpPost("send")]
-        public async Task Post([FromBody] Models.Forecast value)
+        public async Task Post([FromBody] Prediction value)
         {
             try
             {
                 value.CreatedOn = DateTime.Now;
-                await _crudRepository.Save(value);
+                await _crudRepository.SaveAsync(value);
                 _logger.Information($"Item successfully saved: {value}");
                 await _queueSender.SendAsync(value.ToString());
             }
@@ -42,17 +43,23 @@ namespace Forecast.DataReceiver.Controllers
         }
 
         [HttpGet("data")]
-        public IEnumerable<Models.Forecast> GetForecast() => _crudRepository.GetAll<Models.Forecast>();
+        public async Task<List<Prediction>> GetForecast()
+        {
+            return await _crudRepository.ToListAsync<Prediction>();
+        }
 
         [HttpGet("actual")]
-        public Models.Forecast GetActual() => _crudRepository.GetAll<Models.Forecast>().LastOrDefault();
+        public async Task<Prediction> GetActual()
+        {
+            return await _crudRepository.AsQueryable<Prediction>().LastOrDefaultAsync();
+        }
 
         [HttpGet("today")]
-        public IEnumerable<Models.Forecast> GetTodayData()
+        public async Task<List<Prediction>> GetTodayData()
         {
             var endDateTime = DateTime.Today.AddDays(1).AddTicks(-1); //Today at 23:59:59
-            return _crudRepository.GetAll<Models.Forecast>()
-                .Where(d => d.CreatedOn >= DateTime.Today && d.CreatedOn <= endDateTime);
+            return await _crudRepository.AsQueryable<Prediction>()
+                .Where(d => d.CreatedOn >= DateTime.Today && d.CreatedOn <= endDateTime).ToListAsync();
         }
 
         [HttpGet("ping")]

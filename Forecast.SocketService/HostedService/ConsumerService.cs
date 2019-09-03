@@ -9,7 +9,7 @@ using Serilog;
 
 namespace Forecast.SocketService.HostedService
 {
-    public class ConsumerHostedService : BackgroundService
+    public class ConsumerService : BackgroundService
     {
         private readonly INotifyService _notifyService;
         private readonly ILogger _logger;
@@ -17,7 +17,7 @@ namespace Forecast.SocketService.HostedService
         private IModel _channel;
         private readonly IRabbitSettings _rabbitSettings;
 
-        public ConsumerHostedService(INotifyService notifyService, ILogger logger,
+        public ConsumerService(INotifyService notifyService, ILogger logger,
             IRabbitSettings rabbitSettings)
         {
             _notifyService = notifyService;

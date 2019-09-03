@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace Forecast.Shared.Db
 {
-    public class MongoDbClient: Shared.Db.IClient
+    public class MongoDbClient: IClient
     {
         private MongoClient _mongoClient;
         

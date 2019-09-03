@@ -1,4 +1,4 @@
-﻿using Forecast.DataReceiver.DB;
+﻿using Forecast.DataReceiver.Context;
 using Forecast.DataReceiver.Services.Messages;
 using Forecast.DataReceiver.Services.Repository;
 using Forecast.Shared.Configuration;

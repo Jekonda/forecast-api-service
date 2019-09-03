@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using Forecast.Shared.Configuration;
@@ -22,15 +23,22 @@ namespace Forecast.DataReceiver.Services.Messages
             await Task.Run(() =>
             {
                 var factory = new ConnectionFactory {HostName = _rabbitSettings.HostName};
-                using (var connection = factory.CreateConnection())
-                using (var channel = connection.CreateModel())
+                try
                 {
-                    channel.ExchangeDeclare(exchange: _rabbitSettings.ExchangeName, type: "fanout");
-                    var body = Encoding.UTF8.GetBytes(message.ToString());
-                    _logger.Information($"Message to sent: {message}");
-                    channel.BasicPublish(exchange: _rabbitSettings.ExchangeName,
-                        routingKey: "",
-                        basicProperties: null, body);
+                    using (var connection = factory.CreateConnection())
+                    using (var channel = connection.CreateModel())
+                    {
+                        channel.ExchangeDeclare(exchange: _rabbitSettings.ExchangeName, type: "fanout");
+                        var body = Encoding.UTF8.GetBytes(message.ToString());
+                        _logger.Information($"Message to sent: {message}");
+                        channel.BasicPublish(exchange: _rabbitSettings.ExchangeName,
+                            routingKey: "",
+                            basicProperties: null, body);
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.Error(e.Message);
                 }
             });
         }

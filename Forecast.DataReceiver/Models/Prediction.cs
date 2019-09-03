@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Forecast.DataReceiver.Models
 {
     [CollectionName("Forecast")]
-    public class Forecast
+    public class Prediction
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
