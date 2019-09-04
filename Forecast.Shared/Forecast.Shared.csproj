@@ -5,6 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+        <HintPath>..\..\..\..\.nuget\packages\microsoft.aspnetcore.hosting.abstractions\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+      </Reference>
       <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
         <HintPath>..\..\..\..\..\usr\share\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
       </Reference>
@@ -17,13 +20,20 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
       <PackageReference Include="MongoDB.Driver" Version="2.8.1" />
+      <PackageReference Include="RabbitMQ.Client" Version="5.1.1-rc1" />
       <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.1-dev-00209" />
       <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00800" />
+      <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="7.2.0-alpha0005" />
       <PackageReference Include="Serilog.Sinks.MongoDB" Version="4.1.0-dev-00069" />
+      <PackageReference Include="Serilog.Sinks.RabbitMQ" Version="3.0.0" />
     </ItemGroup>
 
 </Project>

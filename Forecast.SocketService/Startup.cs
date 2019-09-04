@@ -1,4 +1,5 @@
-﻿using Forecast.Shared.Extensions;
+﻿using Forecast.Shared.Configuration;
+using Forecast.Shared.Extensions;
 using Forecast.SocketService.HostedService;
 using Forecast.SocketService.Hub;
 using Forecast.SocketService.Notification;
@@ -30,10 +31,10 @@ namespace Forecast.SocketService
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
-            services.AddJsonOptions();
+            services.MapJsonOptions<IRabbitSettings, RabbitSettings>();
             services.AddSingleton<INotifyService, ForecastNotification>();
-            services.AddHostedService<ConsumerHostedService>();
-            services.AddSerilogServices();
+            services.AddHostedService<ConsumerService>();
+            services.AddSerilogConsoleService();
             services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

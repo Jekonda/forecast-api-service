@@ -1,0 +1,19 @@
+<p *ngIf="!forecasts"><em>Loading...</em></p>
+<table class='table table-striped' *ngIf="forecasts">
+  <thead>
+    <tr>
+      <th>Humidity</th>
+      <th>Temp. (C)</th>
+      <th>Pressure. (CM)</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let forecast of forecasts">
+      <td>{{ forecast.humidity }}</td>
+      <td>{{ forecast.temp }}</td>
+      <td>{{ forecast.pressure }}</td>
+      <td>{{ forecast.createdOn }}</td>
+    </tr>
+  </tbody>
+</table>

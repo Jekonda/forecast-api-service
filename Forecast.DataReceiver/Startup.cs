@@ -1,6 +1,7 @@
-﻿using Forecast.DataReceiver.DB;
+﻿using Forecast.DataReceiver.Context;
 using Forecast.DataReceiver.Services.Messages;
 using Forecast.DataReceiver.Services.Repository;
+using Forecast.Shared.Configuration;
 using Forecast.Shared.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,11 +27,12 @@ namespace Forecast.DataReceiver
                 options.AddDefaultPolicy(builder => builder.AllowAnyOrigin());
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddJsonOptions();
+            services.MapJsonOptions<IDatabaseSettings, DatabaseSettings>();
+            services.MapJsonOptions<IRabbitSettings, RabbitSettings>();
             services.AddScoped<ICrudRepository, CrudRepository>();
             services.AddTransient<IQueueSender, RabbitSender>();
             services.UseMongoContext<AppDbContext>();
-            services.AddSerilogServices();
+            services.AddSerilogConsoleService();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
